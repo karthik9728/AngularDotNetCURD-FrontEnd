@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InspectionApiService } from '../inspection-api.service';
 
@@ -10,8 +10,8 @@ import { InspectionApiService } from '../inspection-api.service';
 export class InspectionComponent implements OnInit {
 
   inspectionList$!:Observable<any[]>
-  statusList$!:Observable<any[]>
   inspectionTypeList$!:Observable<any[]>
+  statusList$!:Observable<any[]>
   inspectionTypeList:any=[]
   modalTitle:string ='';
   activateAddEditInspectionComponent:boolean = false; 
@@ -23,21 +23,11 @@ export class InspectionComponent implements OnInit {
 
   constructor(private service:InspectionApiService) { }
 
-  @Input() inspections:any;
-  id:number =0;
-  status:string="";
-  description:string="";
-  inspectionTypeId!:number;
-
   ngOnInit(): void {
-    this.refreshInspectionTypesMap();
-    this.id = this.inspection.id;
-    this.status = this.inspection.status;
-    this.description= this.inspection.description;
-    this.inspectionTypeId= this.inspection.inspectionTypeId;
-    this.statusList$= this.service.getStatusList();
     this.inspectionList$ = this.service.getInspectionList();
     this.inspectionTypeList$ = this.service.getInspectionTypesList();
+    this.statusList$ = this.service.getStatusList();
+    this.refreshInspectionTypesMap();
   }
 
   refreshInspectionTypesMap(){
@@ -60,6 +50,5 @@ export class InspectionComponent implements OnInit {
     this.modalTitle = "Add Inspection"
     this.activateAddEditInspectionComponent = true
   }
-
 
 }
