@@ -34,7 +34,7 @@ export class InspectionApiService {
   }
 
   //InspectionTypes
-  getInspectionTypes():Observable<any[]>{
+  getInspectionTypesList():Observable<any[]>{
     return this.http.get<any>(this.inspectionAPIUrl + '/inspectionTypes');
   }
 
@@ -56,7 +56,7 @@ export class InspectionApiService {
 
 
   //Status
-  getStatus():Observable<any[]>{
+  getStatusList():Observable<any[]>{
     return this.http.get<any>(this.inspectionAPIUrl + '/status');
   }
 
